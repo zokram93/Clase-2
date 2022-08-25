@@ -2,7 +2,7 @@ package ar.unlam.edu.pb2;
 
 public class CuentaGanado {
 	private Integer contador;
-	private Integer limite;
+	private Integer limite = 9;
 
 	public CuentaGanado() {
 		this.contador = 0;

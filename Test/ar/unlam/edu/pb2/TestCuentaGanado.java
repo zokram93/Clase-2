@@ -34,7 +34,6 @@ public class TestCuentaGanado {
 	public void queSeReiniciaPasandoElLimite() {
 		CuentaGanado cuentaGanado = new CuentaGanado();
 		Integer valorEsperado = 0;
-		cuentaGanado.setLimite(9);
 		for (int i = 0; i < 10; i++) {
 			cuentaGanado.sumarUno();
 		}
@@ -42,7 +41,7 @@ public class TestCuentaGanado {
 		assertEquals(valorEsperado, valorObtenido);
 
 	}
-	
+
 	@Test
 	public void queSeReinicieElCuentaGanado() {
 		CuentaGanado cuentaGanado = new CuentaGanado();
