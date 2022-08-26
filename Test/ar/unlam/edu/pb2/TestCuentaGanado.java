@@ -43,6 +43,20 @@ public class TestCuentaGanado {
 	}
 
 	@Test
+	public void queSumaDeACinco() {
+		CuentaGanado nuevo = new CuentaGanado();
+		Integer valorEsperado = 5;
+		for (int i = 0; i < 5; i++) {
+			nuevo.sumarUno();
+		}
+		Integer valorObtenido= nuevo.getContador();
+		assertEquals(valorEsperado, valorObtenido);
+	
+		
+
+	}
+
+	@Test
 	public void queSeReinicieElCuentaGanado() {
 		CuentaGanado cuentaGanado = new CuentaGanado();
 		Integer valorEsperado = 0;
