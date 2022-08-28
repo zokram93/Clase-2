@@ -4,51 +4,72 @@ public class Cerradura {
 	private Integer claveApertura;
 	private Integer cantidadDeIntentosQueLaBloquean;
 	private Integer cantidadDeIntentosHechos;
-	private Boolean estado;
+	private Integer codigoMaestroParaDesbloquear;
+	private Boolean bloqueo;
+	private Boolean openOff;
 
-	public Cerradura(Integer clave, Integer cantidadIntentos) {
+	public Cerradura(Integer clave, Integer cantidadIntentos, Integer codigoMaestro) {
 		this.claveApertura = clave;
+		this.codigoMaestroParaDesbloquear=codigoMaestro;
 		this.cantidadDeIntentosQueLaBloquean = cantidadIntentos;
-		this.cantidadDeIntentosHechos=0;
-		this.estado = false;
+		this.cantidadDeIntentosHechos = 1 ;
+		this.openOff = false;
+		this.bloqueo = false;
 	}
 
 	public boolean consultaEstadoCerradura() {
-		if (this.estado != false)
-			return true;
-		return false;
+		return openOff;
 	}
-	
-	public boolean abrirCerradura (Integer clave) {
-		if(this.claveApertura.equals(clave)&&fueBloqueada()) {
-			this.estado = true;
-			return true;
-		}
-		else {
-			this.cantidadDeIntentosHechos++;
+
+	public boolean abrirCerradura(Integer clave) {
+		if (seBloqueaSiSuperaLaCantidadDeIntentosHechos()==false) {
+
+			if (this.claveApertura.equals(clave)) {
+				this.openOff = true;
+				return true;
+			} else {
+				this.cantidadDeIntentosHechos++;
+				return false;
+			}
+		} else {
 			return false;
 		}
 	}
-		
-	public boolean fueBloqueada () {
-		if(this.cantidadDeIntentosHechos!=this.cantidadDeIntentosQueLaBloquean) {
+
+	public boolean seBloqueaSiSuperaLaCantidadDeIntentosHechos() {
+		if (this.cantidadDeIntentosHechos > this.cantidadDeIntentosQueLaBloquean) {
+			this.bloqueo = true;
 			return true;
-		}
-			else {
-				return false;	
-			}
-		}
-	public void cerrarCerradura () {
-		if (this.estado!=false) {
-			this.estado=false;
+		} else {
+			return false;
 		}
 	}
+
+	public void cerrarCerradura() {
+		if (this.openOff != false) {
+			this.openOff = false;
+		}
+	}
+
 	public Integer getIntentos() {
 		return cantidadDeIntentosHechos;
 	}
 	
-
-
+	public boolean desbloquearCerraduraConCodigoMaestro(Integer codigoMaestro) {
+		if(this.codigoMaestroParaDesbloquear.equals(codigoMaestro)) {
+			this.bloqueo= false;
+			this.cantidadDeIntentosHechos=0;
+			return true;
+		}
+			else {
+				return false;
+			}
+		}
+	public boolean comprobarEstadoDeBloqueo() {
+		return this.bloqueo;
 	}
 	
+}
+	
+
 
