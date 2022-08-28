@@ -7,8 +7,24 @@ import org.junit.Test;
 public class CerraduraTest {
 
 	@Test
-	public void test() {
-		fail("Not yet implemented");
+	public void testContraseniaIncorrecta() {
+		Cerradura prime = new Cerradura(1234,3);
+		Boolean valorEspero=false;
+		Boolean valorObtenido = prime.abrirCerradura(3214);
+		assertEquals(valorEspero,valorObtenido);
+		
 	}
-
+	@Test
+	public void testContraseniaCorrecta() {
+		Cerradura prime = new Cerradura(1234,3);
+		Boolean valorEspero=true;
+		Boolean valorObtenido = prime.abrirCerradura(1234);
+		assertEquals(valorEspero,valorObtenido);
+		
+	}
+	
+	@Test
+	public void testIntentosBloquead() {
+		Cerradura prime = new Cerradura(1234,3);
+	}
 }

@@ -1,13 +1,15 @@
 package ar.unlam.edu.pb2;
 
 public class Cerradura {
-	private Integer clave;
-	private Integer cantidadIntentos;
+	private Integer claveApertura;
+	private Integer cantidadDeIntentosQueLaBloquean;
+	private Integer cantidadDeIntentosHechos;
 	private Boolean estado;
 
 	public Cerradura(Integer clave, Integer cantidadIntentos) {
-		this.clave = clave;
-		this.cantidadIntentos = cantidadIntentos;
+		this.claveApertura = clave;
+		this.cantidadDeIntentosQueLaBloquean = cantidadIntentos;
+		this.cantidadDeIntentosHechos=0;
 		this.estado = false;
 	}
 
@@ -18,12 +20,35 @@ public class Cerradura {
 	}
 	
 	public boolean abrirCerradura (Integer clave) {
-		if(this.clave.equals(clave)) {
-			this.cantidadIntentos++;
+		if(this.claveApertura.equals(clave)&&fueBloqueada()) {
+			this.estado = true;
 			return true;
 		}
-
-		return false;
+		else {
+			this.cantidadDeIntentosHechos++;
+			return false;
+		}
+	}
+		
+	public boolean fueBloqueada () {
+		if(this.cantidadDeIntentosHechos!=this.cantidadDeIntentosQueLaBloquean) {
+			return true;
+		}
+			else {
+				return false;	
+			}
+		}
+	public void cerrarCerradura () {
+		if (this.estado!=false) {
+			this.estado=false;
+		}
+	}
+	public Integer getIntentos() {
+		return cantidadDeIntentosHechos;
 	}
 	
-}
+
+
+	}
+	
+
