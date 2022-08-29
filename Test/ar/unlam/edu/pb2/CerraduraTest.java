@@ -14,6 +14,7 @@ public class CerraduraTest {
 		assertEquals(valorEspero, valorObtenido);
 
 	}
+	
 
 	@Test
 	public void testContraseniaCorrecta() {
